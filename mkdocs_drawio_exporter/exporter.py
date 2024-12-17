@@ -373,10 +373,9 @@ class DrawIoExporter:
         """
         cmd = [
             config['drawio_executable'],
-            '--export', source,
-            '--page-index', str(page_index),
-            '--output', dest,
-            '--format', config['format'],
+             source,
+             '--format', config['format'],
+             '--output', dest,
         ]
         cmd += config['drawio_args']
 
