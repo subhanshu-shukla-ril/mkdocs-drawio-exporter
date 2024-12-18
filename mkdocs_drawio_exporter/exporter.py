@@ -375,7 +375,7 @@ class DrawIoExporter:
             config['drawio_executable'],
             source,
             '--format', config['format'],
-            '--output', dest
+            '--output', os.path.dirname(dest)
         ]
         cmd += config['drawio_args']
         # Join the list into a string, separating elements with a space
