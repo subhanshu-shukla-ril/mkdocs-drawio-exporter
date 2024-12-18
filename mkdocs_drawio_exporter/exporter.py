@@ -378,7 +378,11 @@ class DrawIoExporter:
             '--output', dest
         ]
         cmd += config['drawio_args']
-
+        # Join the list into a string, separating elements with a space
+        cmd_str = " ".join(map(str, cmd))
+        
+        # Print the resulting command
+        print(f"***************************** {cmd_str} ************************")
         try:
             self.log.debug(f'Using export command {cmd}')
             return subprocess.call(cmd)
