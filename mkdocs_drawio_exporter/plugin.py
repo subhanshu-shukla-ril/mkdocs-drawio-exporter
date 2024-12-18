@@ -49,7 +49,7 @@ class DrawIoExporterPlugin(mkdocs.plugins.BasePlugin):
 
         os.makedirs(self.config['cache_dir'], exist_ok=True)
 
-        log.debug(f'Using Draw.io executable "{self.config["drawio_executable"]}", '
+        print(f'Using Draw.io executable "{self.config["drawio_executable"]}", '
                 f'arguments {self.config["drawio_args"]} and '
                 f'cache directory "{self.config["cache_dir"]}"')
 
@@ -63,13 +63,13 @@ class DrawIoExporterPlugin(mkdocs.plugins.BasePlugin):
 
     def on_files(self, files, config, **kwargs):
         keep = self.exporter.filter_cache_files(files, self.config['cache_dir'])
-        log.debug(f'{len(keep)} files left after excluding cache')
+        print(f'{len(keep)} files left after excluding cache')
 
         return Files(keep)
 
     def on_post_build(self, config, **kwargs):
         sources = set(self.sources)
-        log.debug(f'Found {len(sources)} unique sources in {len(self.sources)} total embeds')
+        print(f'Found {len(sources)} unique sources in {len(self.sources)} total embeds')
         self.sources = []
 
         for source in sources:
