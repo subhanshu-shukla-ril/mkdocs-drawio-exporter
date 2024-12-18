@@ -224,14 +224,14 @@ class DrawIoExporter:
         for name in executable_names:
             executable = shutil.which(name)
             if executable:
-                self.log.debug(f'Found Draw.io executable "{name}" at "{executable}"')
+                print(f'Found Draw.io executable "{name}" at "{executable}"')
                 return executable
 
         candidates = platform_executable_paths
-        self.log.debug(f'Trying paths {candidates} for platform "{sys.platform}"')
+        print(f'Trying paths {candidates} for platform "{sys.platform}"')
         for candidate in candidates:
             if os.path.isfile(candidate):
-                self.log.debug(f'Found Draw.io executable for platform "{sys.platform}" at "{candidate}"')
+                print(f'Found Draw.io executable for platform "{sys.platform}" at "{candidate}"')
                 return candidate
 
         raise ConfigurationError.drawio_executable(
@@ -326,13 +326,13 @@ class DrawIoExporter:
         exit_status = None
 
         if self.use_cached_file(source, cache_filename):
-            self.log.debug(f'Source file appears unchanged; using cached copy from "{cache_filename}"')
+            print(f'Source file appears unchanged; using cached copy from "{cache_filename}"')
         else:
             if not config['drawio_executable']:
                 self.log.warning(f'Skipping export of "{source}" as Draw.io executable not available')
                 return (None, exit_status)
 
-            self.log.debug(f'Exporting "{source}" to "{cache_filename}"')
+            print(f'Exporting "{source}" to "{cache_filename}"')
             exit_status = self.export_file(
                     source, page_index, cache_filename, config)
 
@@ -384,7 +384,7 @@ class DrawIoExporter:
         # Print the resulting command
         print(f"***************************** {cmd_str} ************************")
         try:
-            self.log.debug(f'Using export command {cmd}')
+            print(f'Using export command {cmd}')
             return subprocess.call(cmd)
         except (OSError, subprocess.CalledProcessError):
             self.log.exception('Subprocess raised exception')
